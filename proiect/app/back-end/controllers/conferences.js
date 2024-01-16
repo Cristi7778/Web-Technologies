@@ -66,6 +66,7 @@ const deleteConference = async (req, res) => {
 
 export {
   getConferences,
+  getConferenceById,
   createConference,
   deleteConference
 };
