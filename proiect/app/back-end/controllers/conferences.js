@@ -8,6 +8,21 @@ const getConferences = async (req, res) => {
     res.status(500).send({ message: "server error", err: err });
   }
 };
+const getConferenceById = async (req, res) => {
+    const conferenceId = req.params.id;
+  
+    try {
+      const conference = await Conference.findByPk(conferenceId);
+  
+      if (!conference) {
+        return res.status(404).send({ message: "Conference not found." });
+      }
+  
+      res.status(200).send({ conference: conference });
+    } catch (err) {
+      res.status(500).send({ message: "server error", err: err });
+    }
+  };
 
 const createConference = async (req, res) => {
   const { name, date, location, organizerId } = req.body;
@@ -31,9 +46,26 @@ const createConference = async (req, res) => {
     res.status(500).send({ message: "server error", err: err });
   }
 };
+const deleteConference = async (req, res) => {
+    const conferenceId = req.params.id;
+  
+    try {
+      const conference = await Conference.findByPk(conferenceId);
+  
+      if (!conference) {
+        return res.status(404).send({ message: "Conference not found." });
+      }
+  
+      await conference.destroy();
+  
+      res.status(200).send({ message: "Conference deleted" });
+    } catch (err) {
+      res.status(500).send({ message: "server error", err: err });
+    }
+  };
 
 export {
   getConferences,
-  createConference
-
+  createConference,
+  deleteConference
 };
