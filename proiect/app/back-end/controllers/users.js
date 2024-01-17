@@ -69,5 +69,3 @@ export {
   updateUser,
   removeUser
 };
-User.hasMany(Article);
-User.hasMany(Conference);

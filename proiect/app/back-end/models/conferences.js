@@ -27,8 +27,4 @@ export const Conference = db.define("Conference", {
     type:DataTypes.INTEGER,
   }
 });
-
-// Relație 1:N între User și Conference pentru a indica organizatorul
-Conference.belongsTo(User, { as: 'organizer', foreignKey: 'organizerId' });
 export const userTypesEnum = ['organizer', 'reviewer', 'author'];
-Conference.hasOne(Article, { foreignKey: 'articleId' });

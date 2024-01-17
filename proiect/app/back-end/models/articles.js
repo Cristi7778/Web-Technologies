@@ -32,6 +32,3 @@ export const Article = db.define("Article", {
     }
   ]
 });
-Article.belongsTo(User, { as: 'author', foreignKey: 'authorId' });
-Article.belongsTo(User, { as: 'reviewer1', foreignKey: 'reviewer1Id' });
-Article.belongsTo(User, { as: 'reviewer2', foreignKey: 'reviewer2Id' });
