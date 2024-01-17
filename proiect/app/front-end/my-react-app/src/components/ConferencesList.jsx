@@ -5,7 +5,7 @@ const ConferenceList = ({ conferences, editConference, deleteConference }) => {
     return (
         <div id="conferencesContainer">
             {conferences.map((conference, index) => (
-                <ConferenceCard confernce={conference} key={index} onDelete={deleteConference} onEdit={editConference}/>
+                <ConferenceCard conference={conference} key={index} onDelete={deleteConference} onEdit={editConference}/>
             ))}
         </div>
     );

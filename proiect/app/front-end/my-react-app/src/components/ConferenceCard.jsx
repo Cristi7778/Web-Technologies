@@ -13,7 +13,7 @@ const ConferenceCard = ({conference, onDelete, onEdit}) => {
             // impiedicam trimiterea default a formularului -> refresh paginii
             event.preventDefault();
             // pasam functiei de salvare obiectul movie construit prin completarea formularului
-            onEdit({ name, date, location, organizerId, articleId, id: confernce.id});
+            onEdit({ name, date, location, organizerId, articleId, id: conference.id});
             setIsEditMode(false);
         }
     
