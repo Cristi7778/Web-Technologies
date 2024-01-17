@@ -1,5 +1,5 @@
 import { User } from "../models/users.js";
-
+const allReviewers = ["dana","ioana","iulia","alexandra","oana"];
 const getUsers = async (req, res) => {
   try {
     const users = await User.findAll();
@@ -24,11 +24,16 @@ const getUserById = async (req, res) => {
 
 const createUser = async (req, res) => {
   const userData = req.body;
+
   try {
     const newUser = await User.create(userData);
+
+    if (newUser.userType === 'reviewer') {
+      allReviewers.push(newUser);
+    }
     res.status(201).send({ message: "User was created", user: newUser });
   } catch (err) {
-    res.status(500).send({ message: "server error", err: err });
+    res.status(500).send({ message: "Server error", err: err });
   }
 };
 

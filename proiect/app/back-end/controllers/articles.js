@@ -1,5 +1,5 @@
 import { Article } from "../models/articles.js";
-
+const allReviewers = ["dana","ioana","iulia","alexandra","oana"];
 const getArticles = async (req, res) => {
   try {
     const articles = await Article.findAll();
@@ -26,36 +26,15 @@ const getArticleById = async (req, res) => {
 };
 
 const createArticle = async (req, res) => {
-  const { title, content, authorId } = req.body;
-  
-  const getRandomReviewers = async () => {
-    try {
-      const reviewers = await User.findAll({
-        attributes: ['username'],
-        where: { type: 'reviewer' },
-      });
-  
-      if (reviewers.length < 2) {
-        throw new Error("Not enough reviewers available.");
-      }
-  
-      const randomIndices = getRandomIndices(2, reviewers.length);
-      const randomReviewers = randomIndices.map(index => reviewers[index]);
-  
-      return randomReviewers;
-    } catch (err) {
-      console.error("Error getting random reviewers:", err);
-      throw new Error("Unable to get random reviewers");
-    }
-  };
-  const randomReviewers = await getRandomReviewers();
-  try { 
+  const { title, content, authorId, reviewer1Id, reviewer2Id } = req.body;
+
+  try {
     const newArticle = await Article.create({
       title,
       content,
       authorId,
-      reviewer1Id: randomReviewers[0].id,
-      reviewer2Id: randomReviewers[1].id
+      reviewer1Id,
+      reviewer2Id,
     });
 
     res.status(201).send({ message: "Article created", article: newArticle });
@@ -63,7 +42,6 @@ const createArticle = async (req, res) => {
     res.status(500).send({ message: "Server error", err: err });
   }
 };
-
 const updateArticle = async (req, res) => {
   const articleId = req.params.id;
 
@@ -81,7 +59,6 @@ const updateArticle = async (req, res) => {
     res.status(500).send({ message: "Server error", err: err });
   }
 };
-
 const deleteArticle = async (req, res) => {
   const articleId = req.params.id;
 
@@ -106,4 +83,4 @@ export {
   createArticle,
   updateArticle,
   deleteArticle
-};
+}
