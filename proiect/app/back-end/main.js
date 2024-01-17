@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import { router as articleRouter } from './routes/articleRoutes.js';
 import { router as conferenceRouter } from './routes/conferenceRoutes.js';
 import { router as userRouter } from './routes/userRoutes.js';
