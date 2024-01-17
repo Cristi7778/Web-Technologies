@@ -1,3 +1,5 @@
+import { Article } from "../models/articles.js";
+import { Conference } from "../models/conferences.js";
 import { User } from "../models/users.js";
 
 const getUsers = async (req, res) => {
@@ -67,3 +69,5 @@ export {
   updateUser,
   removeUser
 };
+User.hasMany(Article);
+User.hasMany(Conference);

@@ -24,7 +24,7 @@ export const Conference = db.define("Conference", {
     allowNull: false,
   },
   articleId:{
-    type:DataTypes.STRING,
+    type:DataTypes.INTEGER,
   }
 });
 
