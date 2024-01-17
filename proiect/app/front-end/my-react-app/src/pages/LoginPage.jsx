@@ -5,10 +5,8 @@ const LoginForm = ({ onLogin }) => {
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    // Aici puteți adăuga logica de autentificare
-    // Momentan, doar afișăm datele în consolă
     console.log(`Username: ${username}, Password: ${password}`);
-    onLogin(); // Apelați funcția de logare
+    onLogin(); 
   };
 
   return (
