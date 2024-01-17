@@ -1,34 +1,37 @@
-import {db} from "./config.js";
-import {DataTypes, ENUM} from "sequelize";
+import { db } from "./config.js";
+import { DataTypes } from "sequelize";
+
 export const Article = db.define("Article", {
-    reviewer1: {
-		type: DataTypes.users,
-		allowNull:false
-	},
-	reviewer2: {
-		type: DataTypes.users,
-		allowNull: false
-	},
-    title: {
-        type:DataTypes.STRING,
-        primaryKey:true
-    },
-    content:{
-        type:DataTypes.STRING,
-    },
-    author:{
-        type:DataTypes.users,
-        allowNull:false
-    },
-    approved:{
-        type:DataTypes.BOOLEAN,
+  title: {
+    type: DataTypes.STRING,
+    primaryKey: true,
+  },
+  content: {
+    type: DataTypes.STRING,
+  },
+  authorId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  // Adăugăm doi revieweri pentru fiecare articol
+  reviewer1Id: {
+    type: DataTypes.INTEGER,
+  },
+  reviewer2Id: {
+    type: DataTypes.INTEGER,
+  },
+  approved: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
+  },
+}, {
+  indexes: [
+    {
+      unique: true,
+      fields: ['title']
     }
-},
-{
-	indexes: [
-		{
-			unique: true,
-			fields: ['title']
-		}
-	]
+  ]
 });
+Article.belongsTo(User, { as: 'author', foreignKey: 'authorId' });
+Article.belongsTo(User, { as: 'reviewer1', foreignKey: 'reviewer1Id' });
+Article.belongsTo(User, { as: 'reviewer2', foreignKey: 'reviewer2Id' });

@@ -1,30 +1,31 @@
-import {db} from "./config.js";
-import {DataTypes, ENUM} from "sequelize";
+import { db } from "./config.js";
+import { DataTypes } from "sequelize";
+import { User } from "./user.js"; 
+
 export const Conference = db.define("Conference", {
-    id: {
-		type: DataTypes.INTEGER,
-		primaryKey: true,
-		autoIncrement: true
-    },
-    organizer:{
-        type:DataTypes.users,
-        allowNull:false
-    },
-    author:{
-        type:DataTypes.users
-    },
-    article:{
-        type:DataTypes.article
-    },
-    reviewers:{
-        type:DataTypes.ARRAY(DataTypes.users)
-    }
-},
-{
-	indexes: [
-		{
-			unique: true,
-			fields: ['id']
-		}
-	]
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  },
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  date: {
+    type: DataTypes.DATE,
+  },
+  location: {
+    type: DataTypes.STRING,
+  },
+  // Organizatorul conferinței
+  organizerId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
 });
+
+// Relație 1:N între User și Conference pentru a indica organizatorul
+Conference.belongsTo(User, { as: 'organizer', foreignKey: 'organizerId' });
+export const userTypesEnum = ['organizer', 'reviewer', 'author'];
+Conference.hasMany(Article, { foreignKey: 'conferenceId' });

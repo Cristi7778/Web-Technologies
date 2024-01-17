@@ -1,5 +1,47 @@
-import { User } from "../models/users";
-import { Conference } from "../models/conferences";
+import { Conference } from "../models/conference.js";
+import { User } from "../models/user.js";
+
+const createConference = async (req, res) => {
+  const { name, date, location, organizerId } = req.body;
+
+  try {
+    const organizer = await User.findByPk(organizerId);
+
+    if (!organizer || organizer.type !== "organizer") {
+      return res.status(404).send({ message: "Invalid organizer" });
+    }
+
+    const newConference = await Conference.create({
+      name,
+      date,
+      location,
+      organizerId,
+    });
+
+    res.status(201).send({ message: "Conference created", conference: newConference });
+  } catch (err) {
+    res.status(500).send({ message: "server error", err: err });
+  }
+};
+
+const deleteConference = async (req, res) => {
+  const conferenceId = req.params.id;
+
+  try {
+    const conference = await Conference.findByPk(conferenceId);
+
+    if (!conference) {
+      return res.status(404).send({ message: "Conference not found." });
+    }
+
+    await conference.destroy();
+
+    res.status(200).send({ message: "Conference deleted" });
+  } catch (err) {
+    res.status(500).send({ message: "server error", err: err });
+  }
+};
+
 const getConferences = async (req, res) => {
   try {
     const conferences = await Conference.findAll();
@@ -8,65 +50,26 @@ const getConferences = async (req, res) => {
     res.status(500).send({ message: "server error", err: err });
   }
 };
-const getConferenceById = async (req, res) => {
-    const conferenceId = req.params.id;
-  
-    try {
-      const conference = await Conference.findByPk(conferenceId);
-  
-      if (!conference) {
-        return res.status(404).send({ message: "Conference not found." });
-      }
-  
-      res.status(200).send({ conference: conference });
-    } catch (err) {
-      res.status(500).send({ message: "server error", err: err });
-    }
-  };
 
-const createConference = async (req, res) => {
-  const { name, date, location, organizerId } = req.body;
+const getConferenceById = async (req, res) => {
+  const conferenceId = req.params.id;
 
   try {
-    const organizer = await User.findByPk(organizerId);
+    const conference = await Conference.findByPk(conferenceId);
 
-    if (!organizer || organizer.role !== "organizer") {
-      return res.status(404).send({ message: "Invalid organizer" });
+    if (!conference) {
+      return res.status(404).send({ message: "Conference not found." });
     }
 
-    const newConference = await Conference.create({
-      name,
-      date,
-      location,
-      OrganizerId: organizerId,
-    });
-
-    res.status(201).send({ message: "Conference created", conference: newConference });
+    res.status(200).send({ conference: conference });
   } catch (err) {
     res.status(500).send({ message: "server error", err: err });
   }
 };
-const deleteConference = async (req, res) => {
-    const conferenceId = req.params.id;
-  
-    try {
-      const conference = await Conference.findByPk(conferenceId);
-  
-      if (!conference) {
-        return res.status(404).send({ message: "Conference not found." });
-      }
-  
-      await conference.destroy();
-  
-      res.status(200).send({ message: "Conference deleted" });
-    } catch (err) {
-      res.status(500).send({ message: "server error", err: err });
-    }
-  };
 
 export {
-  getConferences,
-  getConferenceById,
   createConference,
-  deleteConference
+  deleteConference,
+  getConferences,
+  getConferenceById
 };

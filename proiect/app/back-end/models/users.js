@@ -1,26 +1,24 @@
-import {db} from "./config.js";
-import {DataTypes, ENUM} from "sequelize";
-
+import { db } from "./config.js";
+import { DataTypes } from "sequelize";
 export const User = db.define("User", {
-	username: {
-		type: DataTypes.STRING,
-		primaryKey: true,
-	},
-	password: {
-		type: DataTypes.STRING,
-		allowNull: false
-	},
-    type: {
-        type:DataTypes.userTypesEnum,
-        allowNull:false
+  username: {
+    type: DataTypes.STRING,
+    primaryKey: true,
+  },
+  password: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  type: {
+    type: DataTypes.ENUM('organizer', 'reviewer', 'author'),
+    allowNull: false,
+  },
+}, {
+  indexes: [
+    {
+      unique: true,
+      fields: ['username', 'password']
     }
-},
-{
-	indexes: [
-		{
-			unique: true,
-			fields: ['username','password']
-		}
-	]
+  ]
 });
-const userTypesEnum = ['organizer', 'reviewer', 'author'];
+export const userTypesEnum = ['organizer', 'reviewer', 'author'];
