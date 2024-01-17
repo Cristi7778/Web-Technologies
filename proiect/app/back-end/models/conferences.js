@@ -22,7 +22,7 @@ export const Conference = db.define("Conference", {
     allowNull: false,
   },
   articleId:{
-    type:DataTypes.INTEGER,
+    type:DataTypes.STRING,
   }
 });
 export const userTypesEnum = ['organizer', 'reviewer', 'author'];
