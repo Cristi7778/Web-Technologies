@@ -16,12 +16,13 @@ const Home = () => {
         axios.get("http://localhost:3000/conferences")
             .then(res => res.data)
             .then(data => dispatch(setConferences(data.records)));
-    }, []);
+    }, [])
 
     return (
         <div>
             <h1>Explore Conferences</h1>
             <button className="custom-button" onClick={navigateToConferences}>Start now</button>
+            <button className="custom-button" onClick={() => navigate("/series")}>Series here</button>
         </div>
     )
 };

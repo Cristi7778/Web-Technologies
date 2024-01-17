@@ -1,13 +1,22 @@
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import {Conferences} from './pages/Conferences';
 import { NotFound } from './pages/NotFound';
 import { Home } from './pages/Home';
 import './App.css';
-import {Conferences} from './pages/Conferences';
 
 function App() {
   return (
     <div className="App">
-      <Conferences/>
+      <div className="header">
+        <div className="app-title">action!</div>
+      </div>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home/>}/>
+          <Route path="/conferences" element={<Conferences/>}/>
+          <Route path="*" element={<NotFound/>}/>
+        </Routes>
+      </Router>
     </div>
   );
 }

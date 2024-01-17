@@ -10,14 +10,10 @@ const ConferenceCard = ({conference, onDelete, onEdit}) => {
         const [articleId, setArticleId] = useState(conference.articleId);
 
         const updateConference = (event) => {
-            // impiedicam trimiterea default a formularului -> refresh paginii
             event.preventDefault();
-            // pasam functiei de salvare obiectul movie construit prin completarea formularului
             onEdit({ name, date, location, organizerId, articleId, id: conference.id});
             setIsEditMode(false);
         }
-    
-        // definim callbacks pentru evenimentele de onChange pentru toate inputurile
         const onChangeName = (event) => {
             setName(event.target.value);
         }
