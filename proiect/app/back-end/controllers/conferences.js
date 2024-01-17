@@ -2,7 +2,7 @@ import { Conference } from "../models/conferences.js";
 import { User } from "../models/users.js";
 
 const createConference = async (req, res) => {
-  const { name, date, location, organizerId } = req.body;
+  const { name, date, location,articleId, organizerId } = req.body;
 
   try {
     const organizer = await User.findByPk(organizerId);
@@ -15,6 +15,7 @@ const createConference = async (req, res) => {
       name,
       date,
       location,
+      articleId,
       organizerId,
     });
 
