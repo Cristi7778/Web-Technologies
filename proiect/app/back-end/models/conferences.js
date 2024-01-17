@@ -13,6 +13,9 @@ export const Conference = db.define("Conference", {
     author:{
         type:DataTypes.users
     },
+    article:{
+        type:DataTypes.article
+    },
     reviewers:{
         type:DataTypes.ARRAY(DataTypes.users)
     }

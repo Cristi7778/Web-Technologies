@@ -2,11 +2,11 @@ import {db} from "./config.js";
 import {DataTypes, ENUM} from "sequelize";
 export const Article = db.define("Article", {
     reviewer1: {
-		type: DataTypes.STRING,
+		type: DataTypes.users,
 		allowNull:false
 	},
 	reviewer2: {
-		type: DataTypes.STRING,
+		type: DataTypes.users,
 		allowNull: false
 	},
     title: {
@@ -17,7 +17,7 @@ export const Article = db.define("Article", {
         type:DataTypes.STRING,
     },
     author:{
-        type:DataTypes.STRING,
+        type:DataTypes.users,
         allowNull:false
     },
     approved:{
