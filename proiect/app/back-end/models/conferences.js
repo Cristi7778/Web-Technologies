@@ -19,14 +19,16 @@ export const Conference = db.define("Conference", {
   location: {
     type: DataTypes.STRING,
   },
-  // Organizatorul conferinței
   organizerId: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     allowNull: false,
   },
+  articleId:{
+    type:DataTypes.STRING,
+  }
 });
 
 // Relație 1:N între User și Conference pentru a indica organizatorul
 Conference.belongsTo(User, { as: 'organizer', foreignKey: 'organizerId' });
 export const userTypesEnum = ['organizer', 'reviewer', 'author'];
-Conference.hasMany(Article, { foreignKey: 'conferenceId' });
+Conference.hasOne(Article, { foreignKey: 'articleId' });

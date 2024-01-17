@@ -11,15 +11,14 @@ export const Article = db.define("Article", {
     type: DataTypes.STRING,
   },
   authorId: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     allowNull: false,
   },
-  // Adăugăm doi revieweri pentru fiecare articol
   reviewer1Id: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
   },
   reviewer2Id: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
   },
   approved: {
     type: DataTypes.BOOLEAN,
