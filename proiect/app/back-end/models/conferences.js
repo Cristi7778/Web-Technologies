@@ -1,7 +1,5 @@
 import { db } from "./config.js";
 import { DataTypes } from "sequelize";
-import { User } from "./users.js"; 
-import { Article } from "./articles.js";
 
 export const Conference = db.define("Conference", {
   id: {
