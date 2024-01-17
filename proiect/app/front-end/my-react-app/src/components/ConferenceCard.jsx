@@ -1,21 +1,15 @@
 import React, {useState} from 'react';
 import {Card, CardContent, Button, Grid, TextField} from '@mui/material';
 
-// componenta MovieCard primeste un prop denumit movie - obiectul ce descrie un film
-// o functie onDelete ce va fi apelata atunci cand se doreste stergerea unui element
-// si o functie onEdit ce va fi apelata atunci cand se doreste editarea unui film
-// componenta are, deci, doua moduri -> read si edit
 const ConferenceCard = ({confernce, onDelete, onEdit}) => {
     const [isEditMode, setIsEditMode] = useState(false);
-        // adaugam in state toate campurile care vor fi completate
-        // valorile initiale sunt cele ale filmului primit
-        const [name, setName] = useState(movie.name);
-        const [date, setDate] = useState(movie.date);
-        const [location, setLocation] = useState(movie.location);
-        const [organizerId, setOrganizerId] = useState(movie.organizerId);
-        const [articleId, setArticleId] = useState(movie.articleId);
+        const [name, setName] = useState(conference.name);
+        const [date, setDate] = useState(conference.date);
+        const [location, setLocation] = useState(conference.location);
+        const [organizerId, setOrganizerId] = useState(conference.organizerId);
+        const [articleId, setArticleId] = useState(conference.articleId);
 
-        const updateMovie = (event) => {
+        const updateConference = (event) => {
             // impiedicam trimiterea default a formularului -> refresh paginii
             event.preventDefault();
             // pasam functiei de salvare obiectul movie construit prin completarea formularului
@@ -56,7 +50,7 @@ const ConferenceCard = ({confernce, onDelete, onEdit}) => {
                         <TextField label="ArticleId" value={articleId} onChange={onChangeArticleId} type="text" id="articleId" name="articleId" required></TextField><br/>
                     </Grid>
 
-                    <Button variant="contained" color="warning" onClick={updateMovie} sx={{marginRight: 1}}>Save</Button>
+                    <Button variant="contained" color="warning" onClick={updateConference} sx={{marginRight: 1}}>Save</Button>
                     <Button variant="contained" color="error" onClick={() => setIsEditMode(false)}>Abort changes</Button>
                 </CardContent>
             
