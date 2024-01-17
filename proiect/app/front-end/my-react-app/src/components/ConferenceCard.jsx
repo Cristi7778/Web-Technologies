@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Card, CardContent, Button, Grid, TextField} from '@mui/material';
 
-const ConferenceCard = ({confernce, onDelete, onEdit}) => {
+const ConferenceCard = ({conference, onDelete, onEdit}) => {
     const [isEditMode, setIsEditMode] = useState(false);
         const [name, setName] = useState(conference.name);
         const [date, setDate] = useState(conference.date);

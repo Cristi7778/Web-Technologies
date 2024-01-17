@@ -1,16 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { ConferenceCard } from '../components/ConferenceCard';
-import { AddConferenceModal } from '../components/AddConferenceModal';
-
+import { ConferenceList } from '../components/ConferencesList';
 const SERVER_URL = "http://localhost:3000";
 
 const Conferences = () => {
     const [conferences, setConferences] = useState([]);
-    // declaram o variabila state pentru a stoca titlul filmului cautat de utilizator
-    const [queryName, setQueryTitle] = useState(null);
-    // declaram o variabila state pentru a determina daca afisam sau nu modala
+    const [queryName, setQueryName] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [viewMode, setViewMode] = useState("list");
 
     const getConferences = () => {
         const queryParams = new URLSearchParams();
@@ -71,11 +69,11 @@ const Conferences = () => {
                 </div>
                 <div id="conferencesContainer">
                 {conferences.map((conference, index) => (
-                    <ConferenceCard confernce={conference} key={index} onDelete={deleteConference} onEdit={editConference}/>
+                    <ConferenceCard conference={conference} key={index} onDelete={deleteConference} onEdit={editConference}/>
                 ))}
                 </div>
                 {viewMode === "list" && <ConferenceList conferences={conferences} deleteConference={deleteConference} editConference={editConference} />}
-                {viewMode === "table" && <ConferenceTable conferences={confereces} deleteConference={deleteConference} />}
+                {viewMode === "table" && <ConferenceTable conferences={conferences} deleteConference={deleteConference} />}
             </div>
             {isModalOpen && <AddConferenceModal onAddConference={addConference} closeModal={closeModal} />}
         </div>

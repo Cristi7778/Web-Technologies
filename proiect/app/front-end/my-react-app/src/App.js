@@ -7,16 +7,7 @@ import {Conferences} from './pages/Conferences';
 function App() {
   return (
     <div className="App">
-      <div class="header">
-        <div class="app-title">action!</div>
-      </div>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home/>}/>
-          <Route path="/movies" element={<Conferences/>}/>
-          <Route path="*" element={<NotFound/>}/>
-        </Routes>
-      </Router>
+      <Conferences/>
     </div>
   );
 }
