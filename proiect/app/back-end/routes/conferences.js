@@ -1,5 +1,5 @@
 import express from 'express';
-import * as conferenceController from "../controllers/conferenceController.js";
+import * as conferenceController from "../controllers/conferences.js";
 
 export const router = express.Router();
 router.get("/", conferenceController.getConferences);
