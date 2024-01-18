@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="App">
       <div className="header">
-        <div className="app-title">action!</div>
+        <div className="app-title">View the conferences!</div>
       </div>
       <Router>
         <Routes>

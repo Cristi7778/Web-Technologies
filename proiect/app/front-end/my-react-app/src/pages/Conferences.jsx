@@ -73,7 +73,7 @@ const Conferences = () => {
                 ))}
                 </div>
                 {viewMode === "list" && <ConferenceList conferences={conferences} deleteConference={deleteConference} editConference={editConference} />}
-                {viewMode === "table" && <ConferenceTable conferences={conferences} deleteConference={deleteConference} />}
+                
             </div>
             {isModalOpen && <AddConferenceModal onAddConference={addConference} closeModal={closeModal} />}
         </div>

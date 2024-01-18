@@ -6,7 +6,6 @@ const NotFound = () => {
     return (
         <div>
             <h1>Page not found.</h1>
-            <div>{`But there are ${conferences.length} conferences in the app`}</div>
         </div>
     )
 };
